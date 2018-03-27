@@ -3,21 +3,7 @@ import sys
 import argparse
 import json
 from workflow import (Workflow, ICON_WEB, ICON_INFO, ICON_WARNING, PasswordNotFound)
-#from workflow.background import run_in_background, is_running
-
-def search_key_for_post(post):
-    """Generate a string search key for a post"""
-
-    item = data[post]
-
-    return '{} {}'.format(item['friendly_name'], item['name'])
-
-    #elements = []
-    #elements.append(post['name'])  # title of post
-    #elements.append(post['friendly_name'])
-    #elements.append(post['tags'])  # post tags
-    #elements.append(post['extended'])  # description
-    #return u' '.join(elements)
+from workflow.background import run_in_background, is_running
 
 def main(wf):
 
@@ -34,22 +20,15 @@ def main(wf):
      ####################################################################
      # Fetch all lamps to display
      ####################################################################
-    #cmd = ['/usr/bin/python', wf.workflowfile('update_data.py allLights')]
-    #run_in_background('update', cmd)
-
-    # Notify the user if the cache is being updated
-    #if is_running('update'):
-    #    wf.add_item('Getting entities from Home Assistant',
-    #                valid=False,
-    #                icon=ICON_INFO)
+    if not is_running('update'):
+        cmd = ['/usr/bin/python', wf.workflowfile('update_data.py')]
+        run_in_background('update', cmd)
 
     data = util.getData(wf, 'light')
 
     def search_key_for_post3(post):
         """Generate a string search key for a post"""
         item = data[post]
-
-        #sys.stderr.write('item :  ' + str(item) + '\n')
 
         elements = []
         elements.append(item['name'])  # title of post
@@ -61,13 +40,6 @@ def main(wf):
         return data
 
     posts = wf.cached_data('allLights', wrapper, max_age=60)
-
-    #sys.stderr.write('args.query : ' + str(args.query) +  '\n')
-    #sys.stderr.write('posts : ' + str(posts) +  '\n')
-
-    #result = []
-    #for post in posts:
-        #result.append(posts[post])
 
     # If script was passed a query, use it to filter posts
     if args.query and data:
