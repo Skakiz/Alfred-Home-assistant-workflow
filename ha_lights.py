@@ -1,12 +1,13 @@
 import home_assistant as util
 import sys
 import argparse
-import json
 from workflow import (Workflow, ICON_WEB, ICON_INFO, ICON_WARNING, PasswordNotFound)
 from workflow.background import run_in_background, is_running
 
 def main(wf):
 
+    ICON_LIGHT_ON = './lightbulb-on-outline.png';
+    ICON_LIGHT_OFF = './lightbulb-outline.png'
 	####################################################################
      # Get init data
     ####################################################################
@@ -33,6 +34,7 @@ def main(wf):
         elements = []
         elements.append(item['name'])  # title of post
         elements.append(item['friendly_name'])
+        elements.append(item['entity_id'])
 
         return u' '.join(elements)
 
@@ -58,12 +60,19 @@ def main(wf):
     for post in posts:
         sys.stderr.write("post : " + str(post) + '\n')
         item = data[post];
+
         if item['state'] != 'unavailable':
+
+            if item['state'] == 'on':
+                ICON = ICON_LIGHT_ON
+            else:
+                ICON = ICON_LIGHT_OFF
+
             wf.add_item(title=item['friendly_name'],
                         valid=True,
-                        arg=item['name'],
+                        arg=item['entity_id'],
                         #arg='https://browall.duckdns.org:8123/api/services/automation/trigger?api_password=DrumNBass1111',
-                        icon=ICON_WEB)
+                        icon=ICON)
 
     # Send the results to Alfred as XML
     wf.send_feedback()

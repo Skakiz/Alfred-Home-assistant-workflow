@@ -29,9 +29,11 @@ def post_to_ha(url, path, password, entity_id):
 
     url = url + '/api/services/' + path + '?api_password=' + password
 
+    sys.stderr.write('url : '+ url + '\n')
     params = dict(count=100, format='json')
     #r = web.post(url, dict,  data='{"entity_id": "' + entity_id + '"}');
-    data='{"entity_id": "' + entity_id + '"}';
+    data='{"entity_id": "' + entity_id + '"}'
+    sys.stderr.write('data : '+ data + '\n')
     r = web.post(url, params, data, headers=None, cookies=None, files=None, auth=None, timeout=60, allow_redirects=False, stream=False)
 
     # throw an error if request failed

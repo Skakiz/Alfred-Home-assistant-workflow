@@ -2,6 +2,7 @@ import home_assistant as util
 import sys
 import argparse
 from workflow import Workflow, ICON_WEB, ICON_WARNING, web, PasswordNotFound
+from workflow.background import run_in_background, is_running
 
 def main(wf):
 
@@ -16,10 +17,10 @@ def main(wf):
     password = util.getPassword(wf)
     url = util.getURL(wf)
     
-    sys.stderr.write('Trigger lights : ' + args.query + '\n')
     result = util.post_to_ha(url, 'light/toggle', password, args.query);
 
-    util.updateData(wf)
+    cmd = ['/usr/bin/python', wf.workflowfile('update_data.py')]
+    run_in_background('update', cmd)
 
     return result
 
