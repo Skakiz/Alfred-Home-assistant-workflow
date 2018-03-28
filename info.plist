@@ -243,6 +243,71 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>_hapassword</string>
+				<key>subtext</key>
+				<string>Enter your password anf hit ENTER</string>
+				<key>text</key>
+				<string>Set your Home Assistant password</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B02BBEF2-2B97-4669-AD70-ABC8DF50419D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python home_assistant.py -setkey {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>99C1ED59-F86C-41AB-8A49-29AB43385047</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Your Home Assistant password was saved</string>
+				<key>title</key>
+				<string>Saved password</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5B757BE3-4E23-4196-847C-633A97EE1E51</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -334,71 +399,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>hasetpassword</string>
-				<key>subtext</key>
-				<string>Enter your password anf hit ENTER</string>
-				<key>text</key>
-				<string>Set your Home Assistant password</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B02BBEF2-2B97-4669-AD70-ABC8DF50419D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python home_assistant.py -setkey {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>99C1ED59-F86C-41AB-8A49-29AB43385047</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>Your Home Assistant password was saved</string>
-				<key>title</key>
-				<string>Saved password</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5B757BE3-4E23-4196-847C-633A97EE1E51</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -425,7 +425,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>haseturl</string>
+				<string>_haurl</string>
 				<key>subtext</key>
 				<string>Only use the Base URL (https://www.url.com:8123)</string>
 				<key>text</key>
@@ -460,6 +460,53 @@
 			<string>7BDAED3F-7344-4CAD-876D-16006F082B12</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>has</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>fetching data</string>
+				<key>script</key>
+				<string>python ha_sensor.py {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Display home assistant sensors</string>
+				<key>title</key>
+				<string>Home Assistant sensors</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7FEF48ED-55E4-4867-AFA0-31FA7CA27EC6</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -562,9 +609,9 @@
 		<key>5B757BE3-4E23-4196-847C-633A97EE1E51</key>
 		<dict>
 			<key>xpos</key>
-			<integer>490</integer>
+			<integer>950</integer>
 			<key>ypos</key>
-			<integer>320</integer>
+			<integer>190</integer>
 		</dict>
 		<key>61C87219-B670-4F66-8E70-88D04F932FDB</key>
 		<dict>
@@ -576,30 +623,37 @@
 		<key>7BDAED3F-7344-4CAD-876D-16006F082B12</key>
 		<dict>
 			<key>xpos</key>
-			<integer>490</integer>
+			<integer>950</integer>
 			<key>ypos</key>
-			<integer>430</integer>
-		</dict>
-		<key>81A4ED43-5E38-41EB-B852-833FCCB6521D</key>
-		<dict>
-			<key>xpos</key>
 			<integer>300</integer>
-			<key>ypos</key>
-			<integer>430</integer>
 		</dict>
-		<key>94ABBC07-7267-47EE-9E7A-6A4123627568</key>
+		<key>7FEF48ED-55E4-4867-AFA0-31FA7CA27EC6</key>
 		<dict>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
-			<integer>430</integer>
+			<integer>320</integer>
+		</dict>
+		<key>81A4ED43-5E38-41EB-B852-833FCCB6521D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>810</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>94ABBC07-7267-47EE-9E7A-6A4123627568</key>
+		<dict>
+			<key>xpos</key>
+			<integer>660</integer>
+			<key>ypos</key>
+			<integer>300</integer>
 		</dict>
 		<key>99C1ED59-F86C-41AB-8A49-29AB43385047</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>810</integer>
 			<key>ypos</key>
-			<integer>320</integer>
+			<integer>190</integer>
 		</dict>
 		<key>A5DEA994-DC7D-4D8C-B02E-6C41F44B2FC4</key>
 		<dict>
@@ -611,9 +665,9 @@
 		<key>B02BBEF2-2B97-4669-AD70-ABC8DF50419D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>50</integer>
+			<integer>660</integer>
 			<key>ypos</key>
-			<integer>320</integer>
+			<integer>190</integer>
 		</dict>
 		<key>CBAB4ED8-21C2-44FC-B2EF-B2237C1CE83B</key>
 		<dict>

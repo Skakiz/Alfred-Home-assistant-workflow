@@ -4,10 +4,13 @@ import argparse
 from workflow import (Workflow, ICON_WEB, ICON_INFO, ICON_WARNING, PasswordNotFound)
 from workflow.background import run_in_background, is_running
 
+def getIcon(type):
+    ICON_TEMP = './icons/lightbulb-on-outline.png';
+
+    return ICON_TEMP;
+
 def main(wf):
 
-    ICON_LIGHT_ON = './icons/lightbulb-on-outline.png';
-    ICON_LIGHT_OFF = './icons/lightbulb-outline.png'
 	####################################################################
      # Get init data
     ####################################################################
@@ -25,7 +28,7 @@ def main(wf):
         cmd = ['/usr/bin/python', wf.workflowfile('update_data.py')]
         run_in_background('update', cmd)
 
-    data = util.getData(wf, 'light')
+    data = util.getData(wf, 'sensor')
 
     def search_key_for_post(post):
         """Generate a string search key for a post"""
@@ -35,13 +38,22 @@ def main(wf):
         elements.append(item['name'])  # title of post
         elements.append(item['friendly_name'])
         elements.append(item['entity_id'])
+        elements.append(item['unit'])
+
+        if 'icon' in item.keys():
+            sys.stderr.write("icon : " + str(item['icon']) + '\n')
+
+            icon = item['icon'].split(':')
+            if(len(icon) == 2):
+                elements.append(icon[1])
+
 
         return u' '.join(elements)
 
     def wrapper():
         return data
 
-    posts = wf.cached_data('allLights', wrapper, max_age=60)
+    posts = wf.cached_data('allSensors', wrapper, max_age=60)
 
     # If script was passed a query, use it to filter posts
     if args.query and data:
@@ -63,15 +75,11 @@ def main(wf):
 
         if item['state'] != 'unavailable':
 
-            if item['state'] == 'on':
-                ICON = ICON_LIGHT_ON
-            else:
-                ICON = ICON_LIGHT_OFF
+            ICON = getIcon(item['friendly_name']);
 
-            wf.add_item(title=item['friendly_name'],
-                        valid=True,
+            wf.add_item(title=item['friendly_name'] + ' : ' + item['state'] + ' ' + item['unit'],
+                        valid=False,
                         arg=item['entity_id'],
-                        #arg='https://browall.duckdns.org:8123/api/services/automation/trigger?api_password=DrumNBass1111',
                         icon=ICON)
 
     # Send the results to Alfred as XML
