@@ -1,13 +1,9 @@
 import home_assistant as util
 import sys
 import argparse
+import icon as icon
 from workflow import (Workflow, ICON_WEB, ICON_INFO, ICON_WARNING, PasswordNotFound)
 from workflow.background import run_in_background, is_running
-
-def getIcon(type):
-    ICON_TEMP = './icons/lightbulb-on-outline.png';
-
-    return ICON_TEMP;
 
 def main(wf):
 
@@ -39,6 +35,7 @@ def main(wf):
         elements.append(item['friendly_name'])
         elements.append(item['entity_id'])
         elements.append(item['unit'])
+        elements.append(item['search_words'])
 
         if 'icon' in item.keys():
             sys.stderr.write("icon : " + str(item['icon']) + '\n')
@@ -57,7 +54,7 @@ def main(wf):
 
     # If script was passed a query, use it to filter posts
     if args.query and data:
-    	posts = wf.filter(args.query, data, key=search_key_for_post)
+    	posts = wf.filter(args.query, data, key=search_key_for_post, min_score=20)
 
     if not posts:  # we have no data to show, so show a warning and stop
         wf.add_item('No posts found', icon=ICON_WARNING)
@@ -73,14 +70,12 @@ def main(wf):
         sys.stderr.write("post : " + str(post) + '\n')
         item = data[post];
 
-        if item['state'] != 'unavailable':
+        ICON = icon.getIcon(item['icon'], 'w');
 
-            ICON = getIcon(item['friendly_name']);
-
-            wf.add_item(title=item['friendly_name'] + ' : ' + item['state'] + ' ' + item['unit'],
-                        valid=False,
-                        arg=item['entity_id'],
-                        icon=ICON)
+        wf.add_item(title=item['friendly_name'] + ' : ' + item['state'] + ' ' + item['unit'],
+                    valid=False,
+                    arg=item['entity_id'],
+                    icon=ICON)
 
     # Send the results to Alfred as XML
     wf.send_feedback()

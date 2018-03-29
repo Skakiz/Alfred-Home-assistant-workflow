@@ -1,12 +1,11 @@
 import home_assistant as util
+import icon as icon
 import sys
 import argparse
 from workflow import (Workflow, ICON_WEB, ICON_INFO, ICON_WARNING, PasswordNotFound)
 from workflow.background import run_in_background, is_running
 
 def main(wf):
-
-    ICON_AUTOMATION = './lightbulb-on-outline.png';
 
     ####################################################################
      # Get init data
@@ -65,7 +64,7 @@ def main(wf):
                     valid=True,
                     arg=item['entity_id'],
                     #arg='https://browall.duckdns.org:8123/api/services/automation/trigger?api_password=DrumNBass1111',
-                    icon=ICON_AUTOMATION)
+                    icon=icon.getIcon('mdi:home','w'))
 
     # Send the results to Alfred as XML
     wf.send_feedback()

@@ -1,46 +1,44 @@
 import sys
 
-def getIcon(icon):
+def getIcon(icon, color):
 
 	result = '';
 
-	if(icon == 'mdi:home'):
-		result = ''
-	else if(icon == 'mdi:alarm'):
-		result = ''
-	else if(icon == 'mdi:run-fast'):
-		result = ''
-	else if(icon == 'mdi:remote'):
-		result = ''
-	else if(icon == 'mdi:compass'):
-		result = ''
-	else if(icon == 'mdi:thermometer' || icon == 'temp'):
-		result = ''
-	else if(icon == 'light-on'):
-		result = ''
-	else if(icon == 'light-off'):
-		result = ''
-	else if(icon == 'mdi:cloud'):
-		result = ''
-	else if(icon == 'mdi:water-percent'):
-		result = ''
-	else if(icon == 'mdi:weather-rainy'):
-		result = ''
-	else if(icon == 'mdi:di:weather-windy'):
-		result = ''
-	else if(icon == 'mdi:volume-high'):
-		result = ''
-	else if(icon == 'mdi:battery'):
-		result = ''
-	else if(icon == 'mdi:wifi'):
-		result = ''
-	else if(icon == 'mdi:signal'):
-		result = ''
-	else if(icon == 'mdi:gauge'):
-		result = ''
-	else if(icon == 'mdi:gauge'):
-		result = ''
-	else if(icon == 'mdi:gauge'):
-		result = ''
+	if icon == 'mdi:home' :
+		result = './icons/home-assistant-icon-' + color + '.png'
+	elif icon == 'mdi:alarm' :
+		result = './icons/alarm-' + color + '.png'
+	elif icon == 'mdi:run-fast' :
+		result = './icons/run_fast-' + color + '.png'
+	elif icon == 'mdi:remote' :
+		result = './icons/remote-' + color + '.png'
+	elif icon == 'mdi:compass' :
+		result = './icons/compass-' + color + '.png'
+	elif icon == 'mdi:thermometer' :
+		result = './icons/thermometer-' + color + '.png'
+	elif icon == 'light-on' :
+		result = './icons/lightbulb-on-' + color + '.png'
+	elif icon == 'light-off' :
+		result = './icons/lightbulb-' + color + '.png'
+	elif icon == 'mdi:cloud' :
+		rresult = './icons/cloud-' + color + '.png'
+	elif icon == 'mdi:water-percent' :
+		result = './icons/water-percent-' + color + '.png'
+	elif icon == 'mdi:weather-rainy' :
+		result = './icons/weather-rainy-' + color + '.png'
+	elif icon == 'mdi:weather-windy' :
+		result = './icons/weather-windy-' + color + '.png'
+	elif icon == 'mdi:volume-high' :
+		result = './icons/volume-high-' + color + '.png'
+	elif icon == 'mdi:battery' :
+		result = './icons/battery-' + color + '.png'
+	elif icon == 'mdi:wifi' :
+		result = './icons/wifi-' + color + '.png'
+	elif icon == 'mdi:signal' :
+		result = './icons/signal-' + color + '.png'
+	elif icon == 'mdi:gauge' :
+		result = './icons/gauge-' + color + '.png'
+	else :
+		result = './icons/home-assistant-icon-' + color + '.png'
 
 	return result;

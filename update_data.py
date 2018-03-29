@@ -3,9 +3,38 @@ import argparse
 import home_assistant as util
 from workflow import web, Workflow, PasswordNotFound
 
+log = None
+
+def copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, icon, unit, value, sensorType):
+
+    search_words = getSearchWords(icon, unit, value, friendly_name)
+    key = entity_id + '_' + sensorType
+    ent = {key: {'type' : ent_type, 'name' : name, 'entity_id' : entity_id, 'icon' : icon, 'friendly_name' : friendly_name, 'unit' : unit, 'state' : value, 'search_words' : search_words}}
+
+    if ent_type in main.keys():
+        main[ent_type].update(ent)
+    else:
+        main[ent_type] = dict(ent);
+
+    return main
+
+def getSearchWords(icon, unit, value, friendly_name):
+    result = '';
+
+    if 'thermo' in icon:
+        result = 'temperature '
+
+    if 'lux' in unit:
+        result = result + 'light '
+
+    if len(unit) == 2 and (unit[1] == 'C' or unit[1] == 'F'):
+        result = result + 'temperature thermometer'
+
+    return result;
+
 def updateData(wf):
 
-    wf.logger.debug('Load entities')
+    log.debug('Started updateing data')
 
     #get URL and password
     password = util.getPassword(wf);
@@ -34,7 +63,7 @@ def updateData(wf):
         ent_name_split = entity_id.split('.')
         ent_type = ent_name_split[0]
         name = ent_name_split[1]
-
+        search_words = '';
         attribute = item['attributes']
 
         icon = ''
@@ -50,19 +79,26 @@ def updateData(wf):
             state = item['state']
 
         friendly_name = item['attributes']['friendly_name']
-        ent = {entity_id : {'type' : ent_type, 'name' : name, 'entity_id' : entity_id, 'icon' : icon, 'friendly_name' : friendly_name, 'unit' : unit, 'state' : state}}
+        search_words = getSearchWords(icon, unit, state, friendly_name);
 
-        #sys.stderr.write('ent :  ' + str(ent) + '\n')
+        ent = {entity_id : {'type' : ent_type, 'name' : name, 'entity_id' : entity_id, 'icon' : icon, 'friendly_name' : friendly_name, 'unit' : unit, 'state' : state, 'search_words' : search_words}}
 
         if ent_type in main.keys():
             main[ent_type].update(ent)
         else:
             main[ent_type] = dict(ent);
 
+        if 'temperature' in item['attributes'].keys() :
+            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'mdi:thermometer', '', str(item['attributes']['temperature']), 'temperature')
+        if 'light_level' in item['attributes'].keys() :
+            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'light-on', 'light level', str(item['attributes']['light_level']), 'light_level')
+        if 'lux' in item['attributes'].keys() :
+            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'light-on', 'lux', str(item['attributes']['lux']), 'lux')
+        if 'battery' in item['attributes'].keys() :
+            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'mdi:battery', '%', str(item['attributes']['battery']), 'battery')
     #go thur groups and store structure
     for item in main:
         wf.store_data(item, main[item])
-        #sys.stderr.write('store :  ' + str(main[item]) + '\n')
 
     return 0
 
@@ -77,4 +113,5 @@ def main(wf):
 
 if __name__ == '__main__':
     wf = Workflow()
+    log = wf.logger
     wf.run(main)
