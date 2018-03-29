@@ -38,6 +38,10 @@ def getIcon(icon, color):
 		result = './icons/signal-' + color + '.png'
 	elif icon == 'mdi:gauge' :
 		result = './icons/gauge-' + color + '.png'
+	elif icon == 'home' :
+		result = './icons/home-' + color + '.png'
+	elif icon == 'away' :
+		result = './icons/away-' + color + '.png'
 	else :
 		result = './icons/home-assistant-icon-' + color + '.png'
 

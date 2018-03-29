@@ -45,7 +45,7 @@ def main(wf):
 
     # If script was passed a query, use it to filter posts
     if args.query and data:
-    	posts = wf.filter(args.query, data, key=search_key_for_post)
+    	posts = wf.filter(args.query, data, key=search_key_for_post, min_score=20)
 
     if not posts:  # we have no data to show, so show a warning and stop
         wf.add_item('No posts found', icon=ICON_WARNING)
@@ -58,17 +58,21 @@ def main(wf):
     #for post in posts:
 
     for post in posts:
-        sys.stderr.write("post : " + str(post) + '\n')
+        #sys.stderr.write("post : " + str(post) + '\n')
         item = data[post];
+        subtitle = ''
 
         if item['state'] != 'unavailable':
 
             if item['state'] == 'on':
                 ICON = icon.getIcon('light-on', 'w')
+                subtitle = '<Enter> to turn OFF light'
             else:
                 ICON = icon.getIcon('light-off', 'b')
+                subtitle = '<Enter> to turn ON light'
 
             wf.add_item(title=item['friendly_name'],
+                        subtitle=subtitle,
                         valid=True,
                         arg=item['entity_id'],
                         #arg='https://browall.duckdns.org:8123/api/services/automation/trigger?api_password=DrumNBass1111',

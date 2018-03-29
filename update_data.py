@@ -5,11 +5,11 @@ from workflow import web, Workflow, PasswordNotFound
 
 log = None
 
-def copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, icon, unit, value, sensorType):
+def copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, icon, unit, value, sensorType, longitude, latitude):
 
     search_words = getSearchWords(icon, unit, value, friendly_name)
     key = entity_id + '_' + sensorType
-    ent = {key: {'type' : ent_type, 'name' : name, 'entity_id' : entity_id, 'icon' : icon, 'friendly_name' : friendly_name, 'unit' : unit, 'state' : value, 'search_words' : search_words}}
+    ent = {key: {'type' : ent_type, 'name' : name, 'entity_id' : entity_id, 'icon' : icon, 'friendly_name' : friendly_name, 'unit' : unit, 'state' : value, 'longitude' : longitude, 'latitude' : latitude, 'search_words' : search_words}}
 
     if ent_type in main.keys():
         main[ent_type].update(ent)
@@ -78,10 +78,21 @@ def updateData(wf):
         if 'state' in item:
             state = item['state']
 
+        latitude = ''
+        if 'latitude' in attribute.keys():
+            latitude = str(attribute['latitude'])
+            sys.stderr.write("latitude : " + latitude + '\n')
+
+        longitude = ''
+        if 'longitude' in attribute.keys():
+            longitude = str(attribute['longitude'])      
+            sys.stderr.write("longitude : " + longitude + '\n')
+        
+
         friendly_name = item['attributes']['friendly_name']
         search_words = getSearchWords(icon, unit, state, friendly_name);
 
-        ent = {entity_id : {'type' : ent_type, 'name' : name, 'entity_id' : entity_id, 'icon' : icon, 'friendly_name' : friendly_name, 'unit' : unit, 'state' : state, 'search_words' : search_words}}
+        ent = {entity_id : {'type' : ent_type, 'name' : name, 'entity_id' : entity_id, 'icon' : icon, 'friendly_name' : friendly_name, 'unit' : unit, 'state' : state, 'longitude' : longitude, 'latitude' : latitude, 'search_words' : search_words}}
 
         if ent_type in main.keys():
             main[ent_type].update(ent)
@@ -89,16 +100,17 @@ def updateData(wf):
             main[ent_type] = dict(ent);
 
         if 'temperature' in item['attributes'].keys() :
-            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'mdi:thermometer', '', str(item['attributes']['temperature']), 'temperature')
+            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'mdi:thermometer', '', str(item['attributes']['temperature']), 'temperature', longitude, latitude)
         if 'light_level' in item['attributes'].keys() :
-            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'light-on', 'light level', str(item['attributes']['light_level']), 'light_level')
+            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'light-on', 'light level', str(item['attributes']['light_level']), 'light_level', longitude, latitude)
         if 'lux' in item['attributes'].keys() :
-            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'light-on', 'lux', str(item['attributes']['lux']), 'lux')
+            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'light-on', 'lux', str(item['attributes']['lux']), 'lux', longitude, latitude)
         if 'battery' in item['attributes'].keys() :
-            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'mdi:battery', '%', str(item['attributes']['battery']), 'battery')
+            main = copyItemAndAdd(main, ent_type, entity_id, name, friendly_name, 'mdi:battery', '%', str(item['attributes']['battery']), 'battery', longitude, latitude)
     #go thur groups and store structure
     for item in main:
         wf.store_data(item, main[item])
+        sys.stderr.write("item : " + str(item) + '\n')
 
     return 0
 

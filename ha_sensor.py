@@ -62,7 +62,6 @@ def main(wf):
         wf.send_feedback()
         return 0
 
-
     # Loop through the returned posts and add an item for each to
     # the list of results for Alfred
     #for post in posts:
@@ -74,6 +73,7 @@ def main(wf):
         ICON = icon.getIcon(item['icon'], 'w');
 
         wf.add_item(title=item['friendly_name'] + ' : ' + item['state'] + ' ' + item['unit'],
+                    subtitle=item['entity_id'],
                     valid=False,
                     arg=item['entity_id'],
                     icon=ICON)
