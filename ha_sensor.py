@@ -18,11 +18,12 @@ def main(wf):
     url = util.getURL(wf);
 
      ####################################################################
-     # Fetch all lamps to display
+     # Fetch all data in background if the query is empty
      ####################################################################
-    if not is_running('update'):
-        cmd = ['/usr/bin/python', wf.workflowfile('update_data.py')]
-        run_in_background('update', cmd)
+    if args.query == None:
+        if not is_running('update'):
+            cmd = ['/usr/bin/python', wf.workflowfile('update_data.py')]
+            run_in_background('update', cmd)
 
     data = util.getData(wf, 'sensor')
 
@@ -38,7 +39,7 @@ def main(wf):
         elements.append(item['search_words'])
 
         if 'icon' in item.keys():
-            sys.stderr.write("icon : " + str(item['icon']) + '\n')
+            #sys.stderr.write("icon : " + str(item['icon']) + '\n')
 
             icon = item['icon'].split(':')
             if(len(icon) == 2):
@@ -50,7 +51,7 @@ def main(wf):
     def wrapper():
         return data
 
-    posts = wf.cached_data('allSensors', wrapper, max_age=60)
+    posts = wf.cached_data('allSensors', wrapper, max_age=1)
 
     # If script was passed a query, use it to filter posts
     if args.query and data:
@@ -67,7 +68,7 @@ def main(wf):
     #for post in posts:
 
     for post in posts:
-        sys.stderr.write("post : " + str(post) + '\n')
+        #sys.stderr.write("post : " + str(post) + '\n')
         item = data[post];
 
         ICON = icon.getIcon(item['icon'], 'w');

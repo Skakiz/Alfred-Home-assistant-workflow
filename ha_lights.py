@@ -18,11 +18,12 @@ def main(wf):
     url = util.getURL(wf);
 
      ####################################################################
-     # Fetch all lamps to display
+     # Fetch all data in background if the query is empty
      ####################################################################
-    if not is_running('update'):
-        cmd = ['/usr/bin/python', wf.workflowfile('update_data.py')]
-        run_in_background('update', cmd)
+    if args.query == None:
+        if not is_running('update'):
+            cmd = ['/usr/bin/python', wf.workflowfile('update_data.py')]
+            run_in_background('update', cmd)
 
     data = util.getData(wf, 'light')
 
@@ -40,7 +41,7 @@ def main(wf):
     def wrapper():
         return data
 
-    posts = wf.cached_data('allLights', wrapper, max_age=60)
+    posts = wf.cached_data('allLights', wrapper, max_age=1)
 
     # If script was passed a query, use it to filter posts
     if args.query and data:
