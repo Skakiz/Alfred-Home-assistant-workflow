@@ -11,9 +11,9 @@ Alfred 2 or higher
 ## Setup
 You have to provide two settings via alfred command. Just type:
 
-_haurl - followed by the address to the home assistant. IE, https://myurl.dnsduck.org:8123. This is stored in the Mach keychain.
+_haurl - followed by the address to the home assistant. IE, https://myurl.dnsduck.org:8123. This is stored in the keychain.
 
-_hapassword - followed bt the API password. This is stored in the Mac keychain.
+_hapassword - followed bt the API password. This is stored in the keychain.
 
 ## Comands
 hal - Home assistant lights
