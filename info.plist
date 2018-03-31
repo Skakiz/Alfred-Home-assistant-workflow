@@ -414,6 +414,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Automation is sent to Home Assistant</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0A46225C-A4CB-46E9-A0F3-52683D7BD2AD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -548,27 +569,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>Automation is sent to Home Assistant</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>0A46225C-A4CB-46E9-A0F3-52683D7BD2AD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -686,9 +686,9 @@
 		<key>0A46225C-A4CB-46E9-A0F3-52683D7BD2AD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>530</integer>
+			<integer>510</integer>
 			<key>ypos</key>
-			<integer>250</integer>
+			<integer>120</integer>
 		</dict>
 		<key>17E47879-68D3-41A7-AE34-0FC8F6BFB52B</key>
 		<dict>
@@ -714,7 +714,7 @@
 		<key>5B757BE3-4E23-4196-847C-633A97EE1E51</key>
 		<dict>
 			<key>xpos</key>
-			<integer>890</integer>
+			<integer>930</integer>
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>
@@ -735,7 +735,7 @@
 		<key>7BDAED3F-7344-4CAD-876D-16006F082B12</key>
 		<dict>
 			<key>xpos</key>
-			<integer>890</integer>
+			<integer>930</integer>
 			<key>ypos</key>
 			<integer>120</integer>
 		</dict>
@@ -749,21 +749,21 @@
 		<key>81A4ED43-5E38-41EB-B852-833FCCB6521D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>740</integer>
+			<integer>790</integer>
 			<key>ypos</key>
 			<integer>120</integer>
 		</dict>
 		<key>94ABBC07-7267-47EE-9E7A-6A4123627568</key>
 		<dict>
 			<key>xpos</key>
-			<integer>590</integer>
+			<integer>650</integer>
 			<key>ypos</key>
 			<integer>120</integer>
 		</dict>
 		<key>99C1ED59-F86C-41AB-8A49-29AB43385047</key>
 		<dict>
 			<key>xpos</key>
-			<integer>740</integer>
+			<integer>790</integer>
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>
@@ -784,7 +784,7 @@
 		<key>B02BBEF2-2B97-4669-AD70-ABC8DF50419D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>590</integer>
+			<integer>650</integer>
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>

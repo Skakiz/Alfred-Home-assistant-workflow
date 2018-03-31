@@ -9,7 +9,7 @@ def getIcon(icon, color):
 	elif icon == 'mdi:alarm' :
 		result = './icons/alarm-' + color + '.png'
 	elif icon == 'mdi:run-fast' :
-		result = './icons/run_fast-' + color + '.png'
+		result = './icons/run-fast-' + color + '.png'
 	elif icon == 'mdi:remote' :
 		result = './icons/remote-' + color + '.png'
 	elif icon == 'mdi:compass' :
@@ -21,7 +21,7 @@ def getIcon(icon, color):
 	elif icon == 'light-off' :
 		result = './icons/lightbulb-' + color + '.png'
 	elif icon == 'mdi:cloud' :
-		rresult = './icons/cloud-' + color + '.png'
+		result = './icons/cloud-' + color + '.png'
 	elif icon == 'mdi:water-percent' :
 		result = './icons/water-percent-' + color + '.png'
 	elif icon == 'mdi:weather-rainy' :
