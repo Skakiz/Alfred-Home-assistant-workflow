@@ -25,7 +25,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CBAB4ED8-21C2-44FC-B2EF-B2237C1CE83B</string>
+				<string>9E763657-AE7F-436A-98EB-0B95E2330B20</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -65,6 +65,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>5B757BE3-4E23-4196-847C-633A97EE1E51</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9E763657-AE7F-436A-98EB-0B95E2330B20</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CBAB4ED8-21C2-44FC-B2EF-B2237C1CE83B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -401,27 +414,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>Automation is sent to Home Assistant</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>0A46225C-A4CB-46E9-A0F3-52683D7BD2AD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -439,6 +431,51 @@
 			<string>94ABBC07-7267-47EE-9E7A-6A4123627568</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>python ha_lights_level.py {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Enter brightness level in %</string>
+				<key>title</key>
+				<string>Enter % bri</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>9E763657-AE7F-436A-98EB-0B95E2330B20</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -507,6 +544,27 @@
 			<string>5CD0A3E8-6186-4672-8E02-64E3E5784F4C</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Automation is sent to Home Assistant</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0A46225C-A4CB-46E9-A0F3-52683D7BD2AD</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -628,9 +686,9 @@
 		<key>0A46225C-A4CB-46E9-A0F3-52683D7BD2AD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>370</integer>
+			<integer>530</integer>
 			<key>ypos</key>
-			<integer>120</integer>
+			<integer>250</integer>
 		</dict>
 		<key>17E47879-68D3-41A7-AE34-0FC8F6BFB52B</key>
 		<dict>
@@ -709,6 +767,13 @@
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>
+		<key>9E763657-AE7F-436A-98EB-0B95E2330B20</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>120</integer>
+		</dict>
 		<key>A5DEA994-DC7D-4D8C-B02E-6C41F44B2FC4</key>
 		<dict>
 			<key>xpos</key>
@@ -726,7 +791,7 @@
 		<key>CBAB4ED8-21C2-44FC-B2EF-B2237C1CE83B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>210</integer>
+			<integer>370</integer>
 			<key>ypos</key>
 			<integer>120</integer>
 		</dict>

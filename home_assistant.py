@@ -45,6 +45,25 @@ def post_to_ha(url, path, password, entity_id):
 
     return entity_id + ' is invoked';
 
+def post_json_to_ha(url, path, password, josn):
+
+    url = url + '/api/services/' + path + '?api_password=' + password
+
+    sys.stderr.write('url : '+ url + '\n')
+    params = dict(count=100, format='json')
+    #r = web.post(url, dict,  data='{"entity_id": "' + entity_id + '"}');
+    sys.stderr.write('josn : '+ josn + '\n')
+    r = web.post(url, params, josn, headers=None, cookies=None, files=None, auth=None, timeout=60, allow_redirects=False, stream=False)
+
+    # throw an error if request failed
+    # Workflow will catch this and show it to the user
+    r.raise_for_status()
+
+    result = r.json()
+    sys.stderr.write('post result : '+ r.text + '\n')
+
+    return result;
+
 def getPassword(wf):
     try:
         password = wf.get_password('ha_password')
