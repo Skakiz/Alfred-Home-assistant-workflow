@@ -10,10 +10,6 @@ def main(wf):
 	####################################################################
      # Get init data
     ####################################################################
-    #parser = argparse.ArgumentParser()
-    #parser.add_argument('query', nargs='?', default=None)
-    #args = parser.parse_args(wf.args)
-
     password = util.getPassword(wf);
     url = util.getURL(wf);
 
@@ -26,12 +22,8 @@ def main(wf):
 
     query = wf.args[0].split(' ')
 
-    sys.stderr.write('in : '+ '\n')
-    
-    level = '';
-    if len(wf.args) == 2 :
-        level = wf.args[1]
-
+    data = util.getData(wf, 'alarm_control_panel')
+    item = data[wf.args[0]]
 
     def search_key_for_post(post):
         elements = []
@@ -39,34 +31,17 @@ def main(wf):
         elements.append(post['value']) 
         return u' '.join(elements)
 
-    def wrapper():
-        data = [{'name' : 'Off', 'value' : 'off'},
-                {'name' : 'max', 'value' : '100'},
-                {'name' : '90%', 'value' : '90'},
-                {'name' : '80%', 'value' : '80'},
-                {'name' : '70%', 'value' : '70'}, 
-                {'name' : '60%', 'value' : '60'}, 
-                {'name' : '50%', 'value' : '50'},
-                {'name' : '40%', 'value' : '40'},
-                {'name' : '30%', 'value' : '30'},
-                {'name' : '20%', 'value' : '20'}, 
-                {'name' : '10%', 'value' : '10'}, 
-                {'name' : 'min', 'value' : '0'}]
-        return data
-
-    posts = wf.cached_data('allLightLevels', wrapper, max_age=60)
-
     # If script was passed a query, use it to filter posts
-    if level:
-        res = wf.filter(level, posts, key=search_key_for_post, min_score=20)
+    if item['state'] == 'disarmed':
+        res = [{'name' : 'Arm home', 'value' : 'arm_home'},
+                {'name' : 'Arm away', 'value' : 'arm_away'}]
     else :
-        res = posts;
+        res = [{'name' : 'Disarmed', 'value' : 'disarmed'}];
 
     if not res:  # we have no data to show, so show a warning and stop
         wf.add_item('No posts found', icon=ICON_WARNING)
         wf.send_feedback()
         return 0
-
 
     # Loop through the returned posts and add an item for each to
     # the list of results for Alfred
@@ -75,17 +50,12 @@ def main(wf):
     for post in res:
         sys.stderr.write("post : " + str(post) + '\n')
 
-        if post['value'] == 'off' :
-            v_icon = icon.getIcon('light-off','w')
-        else : 
-            v_icon = icon.getIcon('light-on','w')
-
         wf.add_item(title=post['name'],
                     subtitle='',
                     valid=True,
                     arg=wf.args[0] + " " + post['value'],
                     #arg='https://browall.duckdns.org:8123/api/services/automation/trigger?api_password=DrumNBass1111',
-                    icon=v_icon)
+                    icon=icon.getIcon('mdi:alarm','w'))
 
         # Send the results to Alfred as XML
     wf.send_feedback()
